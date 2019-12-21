@@ -1,6 +1,8 @@
 function pFunk(feelIt) {
   var str = document.getElementById("input").value;
-  var str1 = str.replace(/new float\[(\w+)]/g, "new Array($1)")
+
+  // TODO: do not include "types" in function params lists
+  var str1 = str.replace(/new float\[(\w+)]/g, "new Array($1)") // wait. NEW ARRAY ?!!?!??!
   .replace(/new float \[(\w+)]/g, "new Array($1)")
   .replace(/new int\[(\w+)]/g, "new Array($1)")
   .replace(/new int \[(\w+)]/g, "new Array($1)")
@@ -11,16 +13,15 @@ function pFunk(feelIt) {
   .replace(/new PVector\((\w+,.\w+)\)/g, "createVector($1)")
   .replace(/new PVector \((\w+,.\w+)\)/g, "createVector($1)")
   .replace(/(int|float|PImage|boolean) ?\[\]/g, "var")
-  .replace(/int|float|boolean|String|Char|PImage|long|PVector/g, "var")
-  .replace(/size/g, "createCanvas")
+  .replace(/(\bint\b|float|boolean|String|\bChar\b|PImage|\blong\b|PVector) /g, "var ")
+  .replace(/\bsize\b/g, "createCanvas")
+  
   .replace(/void/g, "function")
   .replace(/(push)Matrix|(pop)Matrix/g, "$1$2")
   .replace(/(push)Style|(pop)Style/g, "$1$2")
   .replace(/mousePressed/g, "mouseIsPressed")
   .replace(/mouseIsPressed\(\)/g, "mousePressed()")
   .replace(/frameRate/g, "frameRate()")
-  .replace(/myVar/g, "mothership_connection")
-  .replace(/joe is good/, "joe is very good")
   ;
 
 
